@@ -1,0 +1,21 @@
+'use client';
+import {Translated} from './i18n';
+import BirthdayPicker from './birthday-picker';
+import {colorChoices} from './preference-match';
+import {mbtiTypes,type Profile} from './personal-match';
+
+const personalityNames=['建筑师','逻辑学家','指挥官','辩论家','提倡者','调停者','主人公','竞选者','物流师','守卫者','总经理','执政官','鉴赏家','探险家','企业家','表演者'];
+export default function ProfileForm({profile,onChange,onContinue}:{profile:Profile;onChange:(p:Profile)=>void;onContinue:()=>void}){
+ return <Translated><section className="profile-page page-enter"><p className="kicker">FENTY PRISM · ABOUT YOU</p><h2>先认识，独一无二的你。</h2><p className="profile-intro">让今天的色彩灵感，更贴近你的喜好。</p>
+ <form onSubmit={e=>{e.preventDefault();onContinue();}}><div className="profile-fields">
+  <label><span>姓名 / 昵称</span><input autoComplete="nickname" maxLength={40} placeholder="你希望我们怎么称呼你？" value={profile.name} onChange={e=>onChange({...profile,name:e.target.value})}/></label>
+  <BirthdayPicker value={profile.birthday} onChange={birthday=>onChange({...profile,birthday})}/>
+ </div>
+ <fieldset className="profile-picker"><legend>化妆熟练度</legend><div className="preference-options">{[['beginner','刚开始学'],['regular','偶尔化妆'],['expert','熟练化妆']].map(([id,name])=><button type="button" key={id} aria-pressed={profile.skill===id} onClick={()=>onChange({...profile,skill:profile.skill===id?'':id})}>{name}</button>)}</div></fieldset>
+ <fieldset className="profile-picker"><legend>通常愿意花多久化妆</legend><div className="preference-options">{[['5','5分钟以内'],['10','约10分钟'],['20','20分钟以上']].map(([id,name])=><button type="button" key={id} aria-pressed={profile.minutes===id} onClick={()=>onChange({...profile,minutes:profile.minutes===id?'':id})}>{name}</button>)}</div></fieldset>
+ <fieldset className="profile-picker"><legend>今天愿意尝试多大的变化</legend><div className="preference-options">{[['small','小小突破'],['medium','换个风格'],['big','大胆改变']].map(([id,name])=><button type="button" key={id} aria-pressed={profile.change===id} onClick={()=>onChange({...profile,change:id})}>{name}</button>)}</div><p className="profile-picker-note">选择大胆改变，会跳出颜色偏好、MBTI 与收藏习惯，仍考虑熟练度、时间和场景。</p></fieldset>
+ <fieldset className="profile-picker"><legend>特别喜欢或想避开的颜色</legend><p className="profile-picker-note">可以多选；同一色系只能选择喜欢或避开。</p>{(['likedColors','avoidedColors'] as const).map(key=><div className="color-preference-group" key={key}><h3>{key==='likedColors'?'我喜欢':'我想避开'}</h3><div className="preference-colors">{colorChoices.map(c=><button type="button" key={c.id} aria-pressed={(profile[key]||[]).includes(c.id)} onClick={()=>{const chosen=profile[key]||[],other=key==='likedColors'?'avoidedColors':'likedColors';if(key==='avoidedColors'&&!chosen.includes(c.id)&&chosen.length>=colorChoices.length-1)return;onChange({...profile,[key]:chosen.includes(c.id)?chosen.filter(x=>x!==c.id):[...chosen,c.id],[other]:(profile[other]||[]).filter(x=>x!==c.id)});}}><span className="preference-color-strip" style={{background:`linear-gradient(100deg,${c.colors.join(',')})`}}/><strong>{c.name}</strong></button>)}</div></div>)}<button type="button" className="profile-unsure" aria-pressed={!profile.likedColors?.length&&!profile.avoidedColors?.length} onClick={()=>onChange({...profile,likedColors:[],avoidedColors:[]})}>都可以 / 清除选择</button></fieldset>
+ <fieldset className="profile-picker"><legend>MBTI</legend><p className="profile-picker-note">作为风格线索，你的收藏偏好也会参与推荐。</p><div className="profile-option-grid mbti-options">{mbtiTypes.map((type,i)=><button type="button" key={type} aria-pressed={profile.mbti===type} onClick={()=>onChange({...profile,mbti:type})}><img src={`/images/mbti/${type.toLowerCase()}.svg`} alt="" width="120" height="120" loading="lazy"/><strong>{type}</strong><small>{personalityNames[i]}</small></button>)}</div><button type="button" className="profile-unsure" aria-pressed={!profile.mbti} onClick={()=>onChange({...profile,mbti:''})}>不确定 / 暂不选择</button><p className="personality-credit">角色图案：<a href="https://www.16personalities.com/personality-types" target="_blank" rel="noopener noreferrer">16Personalities</a></p></fieldset>
+ <p className="profile-privacy">全部可选，仅保存在此浏览器。妆容会结合熟练度、时间与颜色偏好匹配；MBTI 仅作为风格灵感。</p><button className="gold-cta" type="submit">继续 · 拍摄须知</button><button className="text-button sample-link" type="button" onClick={onContinue}>暂时跳过</button></form>
+ </section></Translated>;
+}

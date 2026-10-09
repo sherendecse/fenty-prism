@@ -1,0 +1,178 @@
+[
+  {
+    "type": "INTJ",
+    "name": "architect",
+    "url": "https://www.16personalities.com/static/images/personality-types/avatars/intj-architect.svg",
+    "path": "/workspace/scratch/ca72ff1bd054/mbti-assets/intj.svg",
+    "bytes": 7399,
+    "status": 200,
+    "title": "Architect (INTJ) personality",
+    "viewBox": "0 0 400 400",
+    "sha256": "928732ce4a20f8c80bb2ae47d14ed88cf1fda25a795a2b34e0159e9097f1701c"
+  },
+  {
+    "type": "INTP",
+    "name": "logician",
+    "url": "https://www.16personalities.com/static/images/personality-types/avatars/intp-logician.svg",
+    "path": "/workspace/scratch/ca72ff1bd054/mbti-assets/intp.svg",
+    "bytes": 7645,
+    "status": 200,
+    "title": "Logician (INTP) personality",
+    "viewBox": "0 0 400 400",
+    "sha256": "0b62260557d5bd9d53b5c00bea29069a42aeaf1454adaf3f873d2352fb2cff01"
+  },
+  {
+    "type": "ENTJ",
+    "name": "commander",
+    "url": "https://www.16personalities.com/static/images/personality-types/avatars/entj-commander.svg",
+    "path": "/workspace/scratch/ca72ff1bd054/mbti-assets/entj.svg",
+    "bytes": 6575,
+    "status": 200,
+    "title": "Commander (ENTJ) personality",
+    "viewBox": "0 0 400 400",
+    "sha256": "30704a3d8a6211eddc0715e2c8786c4346443b04f1920c5e9f5261cc4c79666d"
+  },
+  {
+    "type": "ENTP",
+    "name": "debater",
+    "url": "https://www.16personalities.com/static/images/personality-types/avatars/entp-debater.svg",
+    "path": "/workspace/scratch/ca72ff1bd054/mbti-assets/entp.svg",
+    "bytes": 5550,
+    "status": 200,
+    "title": "Debater (ENTP) personality",
+    "viewBox": "0 0 400 400",
+    "sha256": "aecdca42c53062ae7771ba1c1030ac4774dc02c075fe51f2065833e89020aaf4"
+  },
+  {
+    "type": "INFJ",
+    "name": "advocate",
+    "url": "https://www.16personalities.com/static/images/personality-types/avatars/infj-advocate.svg",
+    "path": "/workspace/scratch/ca72ff1bd054/mbti-assets/infj.svg",
+    "bytes": 7679,
+    "status": 200,
+    "title": "Advocate (INFJ) personality",
+    "viewBox": "0 0 400 400",
+    "sha256": "a261f41801a92e83e2f87f4cd6808685bbe430d15ec194d83754102f7223227a"
+  },
+  {
+    "type": "INFP",
+    "name": "mediator",
+    "url": "https://www.16personalities.com/static/images/personality-types/avatars/infp-mediator.svg",
+    "path": "/workspace/scratch/ca72ff1bd054/mbti-assets/infp.svg",
+    "bytes": 7840,
+    "status": 200,
+    "title": "Mediator (INFP) personality",
+    "viewBox": "0 0 400 400",
+    "sha256": "079e216ffc86ffa76e64b4cac93af46d535f12340f9a137b1b80a833ea414b15"
+  },
+  {
+    "type": "ENFJ",
+    "name": "protagonist",
+    "url": "https://www.16personalities.com/static/images/personality-types/avatars/enfj-protagonist.svg",
+    "path": "/workspace/scratch/ca72ff1bd054/mbti-assets/enfj.svg",
+    "bytes": 6408,
+    "status": 200,
+    "title": "Protagonist (ENFJ) personality",
+    "viewBox": "0 0 400 400",
+    "sha256": "70cc127d0a49bb22c317e0be755b1cda02f80cd7349d4b4471e9a86be9075804"
+  },
+  {
+    "type": "ENFP",
+    "name": "campaigner",
+    "url": "https://www.16personalities.com/static/images/personality-types/avatars/enfp-campaigner.svg",
+    "path": "/workspace/scratch/ca72ff1bd054/mbti-assets/enfp.svg",
+    "bytes": 6709,
+    "status": 200,
+    "title": "Campaigner (ENFP) personality",
+    "viewBox": "0 0 400 400",
+    "sha256": "ec0230f3c216bb637b8f3edebd858224aedcb8a34d8f2bc43055e68bcc8c0c10"
+  },
+  {
+    "type": "ISTJ",
+    "name": "logistician",
+    "url": "https://www.16personalities.com/static/images/personality-types/avatars/istj-logistician.svg",
+    "path": "/workspace/scratch/ca72ff1bd054/mbti-assets/istj.svg",
+    "bytes": 7766,
+    "status": 200,
+    "title": "Logistician (ISTJ) personality",
+    "viewBox": "0 0 400 400",
+    "sha256": "d7357301c702fef07d605982bb6f765d2415e0bb27da77b9859c8db10d083ff5"
+  },
+  {
+    "type": "ISFJ",
+    "name": "defender",
+    "url": "https://www.16personalities.com/static/images/personality-types/avatars/isfj-defender.svg",
+    "path": "/workspace/scratch/ca72ff1bd054/mbti-assets/isfj.svg",
+    "bytes": 5225,
+    "status": 200,
+    "title": "Defender (ISFJ) personality",
+    "viewBox": "0 0 400 400",
+    "sha256": "2dcc3e67b8c39bbbc5f2767ba6fc5993c523cb7e8ae79f18d5e66a6800c5d508"
+  },
+  {
+    "type": "ESTJ",
+    "name": "executive",
+    "url": "https://www.16personalities.com/static/images/personality-types/avatars/estj-executive.svg",
+    "path": "/workspace/scratch/ca72ff1bd054/mbti-assets/estj.svg",
+    "bytes": 8258,
+    "status": 200,
+    "title": "Executive (ESTJ) personality",
+    "viewBox": "0 0 400 400",
+    "sha256": "72010477cb295c6f7b0449c9af2562cc24cea0b74b6ef1a465c81dda254a2e61"
+  },
+  {
+    "type": "ESFJ",
+    "name": "consul",
+    "url": "https://www.16personalities.com/static/images/personality-types/avatars/esfj-consul.svg",
+    "path": "/workspace/scratch/ca72ff1bd054/mbti-assets/esfj.svg",
+    "bytes": 8146,
+    "status": 200,
+    "title": "Consul (ESFJ) personality",
+    "viewBox": "0 0 400 400",
+    "sha256": "cd260eeaa4c3d45cec999cb8eea7574dcf689c4cf5e4da777f235600a588f819"
+  },
+  {
+    "type": "ISTP",
+    "name": "virtuoso",
+    "url": "https://www.16personalities.com/static/images/personality-types/avatars/istp-virtuoso.svg",
+    "path": "/workspace/scratch/ca72ff1bd054/mbti-assets/istp.svg",
+    "bytes": 9137,
+    "status": 200,
+    "title": "Virtuoso (ISTP) personality",
+    "viewBox": "0 0 400 400",
+    "sha256": "6a7d0ac5d98b6f9996d8e91dc8dc133e45a4f712cb2b18ec077386478754443f"
+  },
+  {
+    "type": "ISFP",
+    "name": "adventurer",
+    "url": "https://www.16personalities.com/static/images/personality-types/avatars/isfp-adventurer.svg",
+    "path": "/workspace/scratch/ca72ff1bd054/mbti-assets/isfp.svg",
+    "bytes": 9551,
+    "status": 200,
+    "title": "Adventurer (ISFP) personality",
+    "viewBox": "0 0 400 400",
+    "sha256": "928127368c8f75d3250acaa0f6c962567ca9739448c3db1a84a865b35542de6a"
+  },
+  {
+    "type": "ESTP",
+    "name": "entrepreneur",
+    "url": "https://www.16personalities.com/static/images/personality-types/avatars/estp-entrepreneur.svg",
+    "path": "/workspace/scratch/ca72ff1bd054/mbti-assets/estp.svg",
+    "bytes": 7948,
+    "status": 200,
+    "title": "Entrepreneur (ESTP) personality",
+    "viewBox": "0 0 400 400",
+    "sha256": "865c57e14f366358ba96e4515a8a36a230974185b3f779c6ec24d766ab0f6c8d"
+  },
+  {
+    "type": "ESFP",
+    "name": "entertainer",
+    "url": "https://www.16personalities.com/static/images/personality-types/avatars/esfp-entertainer.svg",
+    "path": "/workspace/scratch/ca72ff1bd054/mbti-assets/esfp.svg",
+    "bytes": 8994,
+    "status": 200,
+    "title": "Entertainer (ESFP) personality",
+    "viewBox": "0 0 400 400",
+    "sha256": "860efbd8f91556deceb5845357c9ad8945458d2d8a73f16531dbdd58da920164"
+  }
+]

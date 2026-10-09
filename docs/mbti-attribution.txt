@@ -1,0 +1,11 @@
+Official 16Personalities personality character illustrations
+Source index: https://www.16personalities.com/personality-types
+Copyright: NERIS Analytics Limited (website footer ©2011–2026)
+Terms: https://www.16personalities.com/terms/general
+Retrieved: 2026-10-06
+
+These original SVG files were downloaded unchanged from 16personalities.com.
+All 16 returned HTTP 200, parsed as SVG, and identify their personality type in the SVG title.
+Exact source URLs, byte counts, viewBox, and SHA-256 digests are in sources.json.
+
+No open redistribution license found. The official terms reserve intellectual property rights and require prior consent for republication on another website, public communication, redistribution, commercial exploitation, or modifying website material. Attribution alone does not establish reuse permission.

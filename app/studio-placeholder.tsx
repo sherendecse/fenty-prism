@@ -1,0 +1,4 @@
+import {Translated} from './i18n';
+export default function StudioPlaceholder({title='准备好，遇见你自己',subtitle='开启摄像头，让妆容贴合你的面容',home=false}:{title?:string;subtitle?:string;home?:boolean}) {
+ return <Translated><div className={`studio-placeholder ${home?'studio-home':''}`}><div className="studio-top"><span>万象 × FENTY BEAUTY</span></div><div className="studio-center"><div className="studio-guide"><svg viewBox="0 0 80 80" aria-hidden="true"><path d="M17 29V20Q17 17 20 17H29M51 17H60Q63 17 63 20V29M63 51V60Q63 63 60 63H51M29 63H20Q17 63 17 60V51" fill="none" stroke="currentColor" strokeWidth="1"/><circle cx="40" cy="40" r="12" fill="none" stroke="currentColor" strokeWidth=".8"/><circle cx="40" cy="40" r="4" fill="none" stroke="currentColor" strokeWidth=".8"/></svg></div><h3>{title}</h3><p>{subtitle}</p></div><div className="studio-bottom"><span>真实面容 · 自由表达</span><span>✧</span></div></div></Translated>;
+}

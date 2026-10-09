@@ -1,0 +1,37 @@
+'use client';
+import {useEffect,useRef,useState,type CSSProperties} from 'react';
+import {Translated,LocalizedText} from './i18n';
+import {cupReadings} from './cup-reading';
+import type {PreferenceResult} from './preference-match';
+export const stickTimeline=[['drop',1800],['hold',2700],['grow',3700],['bigHold',5700],['move',6700],['reveal',8700]] as const;
+export const cupTimeline=[['drop',1800],['grow',2800],['bigHold',4800],['move',5800],['reveal',7800]] as const;
+export const diceTimeline=[['grow',2000],['bigHold',4000],['move',5000],['reveal',7000]] as const;
+type Phase='choose'|'shake'|'roll'|'drop'|'hold'|'grow'|'bigHold'|'shrink'|'move'|'reveal';
+const positions:Record<number,number[]>={1:[4],2:[0,8],3:[0,4,8],4:[0,2,6,8],5:[0,2,4,6,8],6:[0,2,3,5,6,8]};
+function Die({value}:{value:number}){
+ const adjacent=[1,2,3,4,5,6].filter(n=>n!==value&&n!==7-value);
+ const side=adjacent[0],front=adjacent.find(n=>n!==side&&n!==7-side)!;
+ const values=[front,7-front,side,7-side,value,7-value];
+ return <div className={`game-die ${value===1||value===4?'red-pips':''}`} role="img" aria-label={`${value}`}><div className="die-cube">{values.map((n,face)=><div key={face} className={`die-face face-${face} ${n===1||n===4?'face-red':''}`} data-result={face===4?'true':undefined}><div className="die-pips">{Array.from({length:9},(_,i)=><span key={i} className={positions[n].includes(i)?'visible':''}/>)}</div></div>)}</div></div>;
+}
+const diceTitles=[['点数开了个小玩笑','A little joke from the dice'],['今天的妆，有新剧情','A new plot for today’s look'],['两颗骰子的美妆密谋','A beauty plot between two dice'],['灵感落地，请接招','Inspiration has landed'],['这次，惊喜站你这边','Surprise is on your side'],['点数替你打开脑洞','Let the dots spark an idea']];
+export default function Lottery({result,onDraw,onContinue}:{result:PreferenceResult|null;onDraw:(number:number,dice?:[number,number],cup?:number)=>PreferenceResult;onContinue:()=>void}){
+ const [phase,setPhase]=useState<Phase>(result?'reveal':'choose'),[game,setGame]=useState<'stick'|'dice'|'cup'>(result?.cup!==undefined?'cup':result?.dice?'dice':'stick');
+ const [faces,setFaces]=useState<[number,number]>(result?.dice||[1,4]);
+ const [readingHeight,setReadingHeight]=useState(500),readingRef=useRef<HTMLElement|null>(null);
+ const timers=useRef<ReturnType<typeof setTimeout>[]>([]);
+ useEffect(()=>()=>{timers.current.forEach(clearTimeout);},[]);
+ useEffect(()=>{if(phase!=='roll')return;let k=0;const timer=setInterval(()=>{k++;setFaces([k%6+1,(k*5+2)%6+1]);},260);return()=>clearInterval(timer);},[phase]);
+ useEffect(()=>{const element=readingRef.current;if(!element)return;const observer=new ResizeObserver(()=>setReadingHeight(element.offsetHeight));observer.observe(element);return()=>observer.disconnect();},[phase]);
+ const draw=(next:'stick'|'dice'|'cup')=>{if(phase!=='choose'&&phase!=='reveal')return;timers.current.forEach(clearTimeout);setGame(next);const random=new Uint32Array(2);crypto.getRandomValues(random);const dice:[number,number]=[random[0]%6+1,random[1]%6+1];const cup=random[1]%20===0?3:random[1]%3;const matched=next==='cup'?onDraw(random[0]%101+1,undefined,cup):next==='dice'?onDraw((dice[0]-1)*6+dice[1],dice):onDraw(random[0]%101+1);
+ if(window.matchMedia('(prefers-reduced-motion: reduce)').matches){setFaces(dice);setPhase('reveal');return;}
+ setPhase(next==='dice'?'roll':'shake');const timeline=next==='cup'?cupTimeline:next==='dice'?diceTimeline:stickTimeline;
+ timers.current=timeline.map(([stage,at])=>setTimeout(()=>{if(next==='dice'&&stage==='grow')setFaces(matched.dice||dice);setPhase(stage);},at));};
+ return <Translated><section className={`lottery-page page-enter ${phase!=='choose'?'lottery-playing':''}`}><p className="kicker">FENTY PRISM · SURPRISE</p><h2>{phase==='choose'?'打开，今天的另一面。':game==='dice'?'两颗骰子，掷出新可能。':game==='cup'?'两半杯茭，接住新灵感。':'一支色签，一种新可能。'}</h2>
+ {phase==='choose'?<><p className="profile-intro">选一种玩法，打开你的盲盒。</p><div className="lottery-choices"><button onClick={()=>draw('stick')}><span className="lottery-choice-image"><img src="/images/lottery/tube.webp" alt="装着红色竹签的竹筒"/></span><small>01</small><h3>抽签</h3><p>摇出一支签，发现今天的妆容灵感。</p></button><button onClick={()=>draw('dice')}><span className="lottery-choice-image dice-choice"><Die value={1}/><Die value={4}/></span><small>02</small><h3>掷骰子</h3><p>让两个点数，给今天的妆一点新剧情。</p></button><button onClick={()=>draw('cup')}><span className="lottery-choice-image cup-choice"><img src="/images/lottery/cup-flat-v2.webp" alt="红色杯茭平面"/><img src="/images/lottery/cup-round-v2.webp" alt="红色杯茭凸面"/></span><small>03</small><h3>掷杯茭</h3><p>两半落地，接住今天的趣味灵感。</p></button></div></>:<div className={`lottery-stage lottery-${phase} game-${game}`} style={{'--reading-height':`${readingHeight}px`} as CSSProperties} aria-busy={phase!=='reveal'}>
+ <div className="lottery-visual">{game==='stick'?<><img className="lottery-tube" src="/images/lottery/tube.webp" alt=""/><div className="lottery-stick-wrap"><div className="lottery-halo"/><img src="/images/lottery/stick.webp" className="lottery-stick" alt=""/><span className="lottery-number">{result?.number}</span></div></>:game==='cup'?<div className="cup-pair"><img className="cup-closed" src="/images/lottery/cup-closed-v3.webp" alt="" aria-hidden="true"/>{cupReadings[result?.cup??0].faces.map((face,i)=><div key={i} className={`cup-orbit cup-${face} ${i===0?'cup-left':'cup-right'}`}><div className="lottery-halo"/><img src={`/images/lottery/cup-${phase==='shake'?'round':face==='edge'?'round':face}-v2.webp`} alt=""/></div>)}</div>:<div className="dice-pair">{faces.map((value,i)=><div className="dice-orbit" key={i}><div className="lottery-halo"/><Die value={value}/></div>)}</div>}{phase==='reveal'&&<div className="dice-result-actions"><button type="button" className="dice-reroll" onClick={()=>draw(game)}>{game==='dice'?'重新掷骰子':'重新抽签'}</button><button type="button" className="dice-reroll" onClick={()=>{timers.current.forEach(clearTimeout);setPhase('choose');}}>选择其他盲盒玩法</button></div>}</div>
+ {phase!=='reveal'&&<p className="lottery-status" role="status">{phase==='roll'?'骰子滚动，惊喜待定…':phase==='shake'?(game==='cup'?'杯茭轻摇，灵感将至…':'竹筒轻摇，灵感将至…'):'你的妆容灵感正在揭晓…'}</p>}
+ {(phase==='move'||phase==='reveal')&&result&&<article ref={readingRef} className="lottery-reading" aria-hidden={phase!=='reveal'} aria-live="polite"><p className="kicker">{game==='cup'?<>杯茭 · 妆容灵感</>:game==='dice'?<>点数 {result.dice?.join(' + ')} · 妆容灵感</>:<>第 {result.number} 签 · 色彩灵感</>}</p>{game==='stick'?<div className="lottery-poem"><LocalizedText zh={result.poem} en={result.poemEn}/></div>:game==='cup'?<h3 className="cup-reading-title"><LocalizedText zh={cupReadings[result.cup??0].name} en={cupReadings[result.cup??0].en}/></h3>:<h3 className="dice-reading-title"><LocalizedText zh={diceTitles[((result.dice?.[0]||1)*3+(result.dice?.[1]||1))%diceTitles.length][0]} en={diceTitles[((result.dice?.[0]||1)*3+(result.dice?.[1]||1))%diceTitles.length][1]}/></h3>}<p className="lottery-interpretation"><LocalizedText zh={result.interpretation} en={result.interpretationEn}/></p><div className="lottery-matched"><small>为你匹配的妆容</small><h3>{result.name}</h3><div className="lottery-palette">{[result.palette.eye,result.palette.blush,result.palette.lip].map((c,i)=><span key={i}><i style={{background:c}}/>{['眼妆','腮红','唇色'][i]}</span>)}</div><p><LocalizedText zh={result.reason} en={result.reasonEn}/></p></div><button className="gold-cta" disabled={phase!=='reveal'} onClick={onContinue}>试试这套妆容</button></article>}
+ </div>}
+ </section></Translated>;
+}
